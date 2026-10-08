@@ -17,11 +17,13 @@ b,strong{font-weight:700}
 .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
 .topbar{background:var(--ink);color:#fff;font-size:13px;padding:7px 0;text-align:center}
 .nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--g1)}
-.nav .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
-.brand{font-weight:900;text-transform:uppercase;letter-spacing:.3px;font-size:15px;margin-right:auto}
+.nav{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.nav .wrap{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;padding-top:6px;padding-bottom:6px}
+.brand{font-weight:900;text-transform:uppercase;letter-spacing:.3px;font-size:14px;margin-right:auto;white-space:nowrap}
 .brand small{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--g4);font-size:12px}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tab{font-family:'Poppins','Nunito Sans',Arial,sans-serif;border:2px solid var(--green-d);background:#fff;color:var(--green-d);border-radius:21px;padding:6px 13px;font-size:13px;font-weight:600;text-transform:uppercase;cursor:pointer;letter-spacing:.2px}
+.tabs{display:flex;gap:5px;flex-wrap:nowrap;min-width:0}
+.tab{font-family:'Poppins','Nunito Sans',Arial,sans-serif;border:2px solid var(--green-d);background:#fff;color:var(--green-d);border-radius:21px;padding:4px 11px;font-size:12px;font-weight:600;text-transform:uppercase;cursor:pointer;letter-spacing:.2px;white-space:nowrap;line-height:1.4}
+.tab .ts{display:none}
 .tab[aria-selected=true],.tab:hover{background:var(--green);border-color:var(--green);color:#fff}
 .hero{background:var(--char);color:#fff;padding:22px 0 20px}
 .hero .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -192,6 +194,17 @@ table.t.grid tr.normrow{background:var(--g2)}
  .g3w{grid-template-columns:1fr 1fr}
  .pipe{grid-template-columns:repeat(3,1fr)}
 }
+@media (max-width:1000px){
+ .brand{display:none}
+ .tabs{flex:1}
+ .tab{flex:1 1 auto}
+}
+@media (max-width:760px){
+ .tab .tl{display:none}
+ .tab .ts{display:inline}
+ .tab{padding:4px 6px;font-size:11px;letter-spacing:0;border-width:1.5px}
+ .tabs{gap:4px}
+}
 @media (max-width:900px){
  .g3,.g21,.g12,.g3w,.side,.pub,.g4{grid-template-columns:1fr}
  .pipe{grid-template-columns:1fr 1fr}
@@ -200,8 +213,6 @@ table.t.grid tr.normrow{background:var(--g2)}
 @media (max-width:600px){
  .hero h1{font-size:25px}
  .blt{font-size:17px}
- .tab{padding:5px 10px;font-size:11.5px}
- .nav{position:static}
  .mapkeys{grid-template-columns:1fr}
  .t3{grid-template-columns:1fr 1fr 1fr}
  .tile .tn{font-size:19px}
@@ -216,15 +227,14 @@ table.t.grid tr.normrow{background:var(--g2)}
 <div class="topbar"><div class="wrap">Concept by Joseph Myers, built on Peace Parks&#x27; public data. Not an official Peace Parks product.</div></div>
 <nav class="nav"><div class="wrap">
   <div class="brand">Peace Parks data concept</div>
-  <div class="tabs" role="tablist" aria-label="Pages"><button class="tab" role="tab" id="tab-p1" aria-controls="p1" data-page="p1">1 · Published numbers</button><button class="tab" role="tab" id="tab-p2" aria-controls="p2" data-page="p2">2 · Fire detections</button><button class="tab" role="tab" id="tab-p3" aria-controls="p3" data-page="p3">3 · Rainfall</button><button class="tab" role="tab" id="tab-p4" aria-controls="p4" data-page="p4">4 · How it was built</button></div>
+  <div class="tabs" role="tablist" aria-label="Pages"><button class="tab" role="tab" id="tab-p1" aria-controls="p1" data-page="p1" aria-label="1 · Published numbers"><span class="tl">1 · Published numbers</span><span class="ts" aria-hidden="true">Numbers</span></button><button class="tab" role="tab" id="tab-p2" aria-controls="p2" data-page="p2" aria-label="2 · Fire detections"><span class="tl">2 · Fire detections</span><span class="ts" aria-hidden="true">Fire</span></button><button class="tab" role="tab" id="tab-p3" aria-controls="p3" data-page="p3" aria-label="3 · Rainfall"><span class="tl">3 · Rainfall</span><span class="ts" aria-hidden="true">Rainfall</span></button><button class="tab" role="tab" id="tab-p4" aria-controls="p4" data-page="p4" aria-label="4 · How it was built"><span class="tl">4 · How it was built</span><span class="ts" aria-hidden="true">How built</span></button></div>
 </div></nav>
 <main>
 <section class="pbi" id="powerbi" aria-labelledby="pbi-h"><div class="wrap">
   <div class="pbtop">
     <div class="pbtxt"><p class="kicker">Power BI version</p><h2 id="pbi-h">Built in Power BI</h2>
     <p>This page mirrors a 4-page Power BI report built on the same data model.</p></div>
-    <div class="pbact"><a class="pbbtn" href="powerbi/PeaceParks-Concept.pbix" download="PeaceParks-Concept.pbix" type="application/octet-stream">Download the Power BI file (.pbix, 0.7 MB)</a><!-- POWERBI_PUBLIC_LINK slot: set the constant in build_site.py to show 'Open the live report' -->
-    <p class="pbnote">Opens in Power BI Desktop, or upload to the Power BI service (Import &gt; From this computer).</p></div>
+    <div class="pbact"><!-- POWERBI_PUBLIC_LINK slot: set the constant in build_site.py to show 'Open the live report' --><p class="pbnote">The .pbix file is available on request.</p></div>
   </div>
   <div class="pbgal"><figure class="pbshot"><a href="powerbi/powerbi-1-published-numbers.jpg" target="_blank" rel="noopener" aria-label="Page 1, Published numbers: open full size"><img src="powerbi/powerbi-1-published-numbers-thumb.jpg" width="640" height="322" loading="lazy" decoding="async" alt="Screenshot of the PeaceParks-Concept report in the Power BI service, Page 1, Published numbers"></a><figcaption>Page 1, Published numbers</figcaption></figure><figure class="pbshot"><a href="powerbi/powerbi-2-fire.jpg" target="_blank" rel="noopener" aria-label="Page 2, Fire detections: open full size"><img src="powerbi/powerbi-2-fire-thumb.jpg" width="640" height="322" loading="lazy" decoding="async" alt="Screenshot of the PeaceParks-Concept report in the Power BI service, Page 2, Fire detections"></a><figcaption>Page 2, Fire detections</figcaption></figure><figure class="pbshot"><a href="powerbi/powerbi-3-rainfall.jpg" target="_blank" rel="noopener" aria-label="Page 3, Rainfall: open full size"><img src="powerbi/powerbi-3-rainfall-thumb.jpg" width="640" height="322" loading="lazy" decoding="async" alt="Screenshot of the PeaceParks-Concept report in the Power BI service, Page 3, Rainfall"></a><figcaption>Page 3, Rainfall</figcaption></figure><figure class="pbshot"><a href="powerbi/powerbi-4-how-built.jpg" target="_blank" rel="noopener" aria-label="Page 4, How it was built: open full size"><img src="powerbi/powerbi-4-how-built-thumb.jpg" width="640" height="322" loading="lazy" decoding="async" alt="Screenshot of the PeaceParks-Concept report in the Power BI service, Page 4, How it was built"></a><figcaption>Page 4, How it was built</figcaption></figure></div>
 </div></section>
